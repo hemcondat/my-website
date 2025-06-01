@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دواك كن عونا - ساعد غيرك بصحة أفضل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c7a7b;
+            --secondary: #319795;
+            --light: #e6fffa;
+            --dark: #234e52;
+            --danger: #e53e3e;
+            --success: #38a169;
+            --warning: #dd6b20;
+            --gray: #718096;
+            --light-gray: #edf2f7;
+            --transition: all 0.4s ease;
+        }
+
+        body {
+            background-color: #f7fafc;
+            color: #2d3748;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* التصميم العام */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .logo i {
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: var(--transition);
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(44, 122, 123, 0.8), rgba(44, 122, 123, 0.9)), url('https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.1) 80%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        .btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            background: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        section {
+            padding: 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            background: var(--light);
+            color: var(--primary);
+            font-size: 2.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        .feature-content {
+            padding: 1.5rem;
+        }
+
+        .feature-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-content h3 {
+            color: var(--dark);
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .form-container:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .form-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .medicines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .medicine-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            position: relative;
+            transform: scale(1);
+        }
+
+        .medicine-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .medicine-header {
+            padding: 1rem;
+            background: var(--light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .medicine-card:hover .medicine-header {
+            background: var(--primary);
+            color: white;
+        }
+
+        .medicine-name {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .medicine-card:hover .medicine-name {
+            color: white;
+        }
+
+        .medicine-quantity {
+            background: var(--primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .medicine-card:hover .medicine-quantity {
+            background: white;
+            color: var(--primary);
+        }
+
+        .medicine-body {
+            padding: 1.5rem;
+        }
+
+        .medicine-detail {
+            display: flex;
+            margin-bottom: 0.8rem;
+        }
+
+        .medicine-detail i {
+            color: var(--primary);
+            width: 24px;
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+
+        .medicine-card:hover .medicine-detail i {
+            color: var(--secondary);
+        }
+
+        .expiry-date {
+            background: var(--warning);
+            color: white;
+            padding: 8px 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .medicine-card:hover .expiry-date {
+            background: var(--danger);
+        }
+
+        .medicine-actions {
+            display: flex;
+            gap: 10px;
+            padding: 1rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover .stat-number {
+            color: var(--dark);
+        }
+
+        .stat-title {
+            color: var(--gray);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover .stat-title {
+            color: var(--dark);
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 5rem;
+            color: var(--light);
+            font-family: Georgia, serif;
+            line-height: 1;
+            z-index: 1;
+        }
+
+        .testimonial-content {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--dark);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .footer-section:hover h3::after {
+            width: 100%;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.7rem;
+            transition: var(--transition);
+        }
+
+        .footer-links li:hover {
+            transform: translateX(5px);
+        }
+
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .contact-info:hover {
+            transform: translateX(5px);
+        }
+
+        .contact-info i {
+            margin-left: 10px;
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: var(--light);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        /* الرسائل والتنبيهات */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.4s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: var(--success);
+        }
+
+        .notification.error {
+            background: var(--danger);
+        }
+
+        /* الرسوم المتحركة */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* التصميم المتجاوب */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .back-to-top {
+                left: 20px;
+                bottom: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .medicine-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .medicine-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- رأس الصفحة -->
+    <header id="header">
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-pills"></i>
+                <h1>دواك كن عونا</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">الرئيسية</a></li>
+                    <li><a href="#donate">تبرع الآن</a></li>
+                    <li><a href="#medicines">الأدوية المتاحة</a></li>
+                    <li><a href="#request">طلب أدوية</a></li>
+                    <li><a href="#testimonials">قصص نجاح</a></li>
+                    <li><a href="#about">عن التطبيق</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- قسم البطل -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h2>شارك في إنقاذ حياة... تبرع بالأدوية الزائدة لديك</h2>
+            <p>منصة إلكترونية تمكنك من التبرع بالأدوية الزائدة عن حاجتك لتصل إلى من يحتاجها، وتساهم في تقليل الهدر الصحي ومساعدة المرضى المحتاجين.</p>
+            <div class="hero-buttons">
+                <a href="#donate" class="btn">تبرع الآن</a>
+                <a href="#medicines" class="btn btn-secondary">تصفح الأدوية المتاحة</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- مميزات التطبيق -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">مميزات تطبيقنا</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>تبرع بسهولة</h3>
+                        <p>يمكنك التبرع بالأدوية الزائدة لديك بخطوات بسيطة وسهلة، فقط قم بتعبئة النموذج وسنتولى الباقي.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>تصفح الأدوية</h3>
+                        <p>تصفح قائمة الأدوية المتاحة للتبرع وابحث عما تحتاجه من أدوية بسهولة وسرعة.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>فحص الجودة</h3>
+                        <p>جميع الأدوية المتبرع بها تخضع لفحص جودة دقيق للتأكد من سلامتها وصلاحيتها للاستخدام.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- نموذج التبرع -->
+    <section id="donate" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">نموذج التبرع بالأدوية</h2>
+            <div class="form-container">
+                <div class="form-header">
+                    <h3>سجل تبرعك الآن</h3>
+                </div>
+                <div class="form-body">
+                    <form id="donation-form">
+                        <div class="form-group">
+                            <label for="donor-name">اسم المتبرع</label>
+                            <input type="text" id="donor-name" class="form-control" placeholder="أدخل اسمك الكامل" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donor-phone">رقم الهاتف</label>
+                            <input type="tel" id="donor-phone" class="form-control" placeholder="أدخل رقم هاتفك" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="donor-email">البريد الإلكتروني (اختياري)</label>
+                            <input type="email" id="donor-email" class="form-control" placeholder="أدخل بريدك الإلكتروني">
+                        </div>
+                        <div class="form-group">
+                            <label for="medicine-name">اسم الدواء</label>
+                            <input type="text" id="medicine-name" class="form-control" placeholder="اسم الدواء التجاري أو العلمي" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="medicine-quantity">الكمية المتاحة</label>
+                            <input type="number" id="medicine-quantity" class="form-control" placeholder="عدد العبوات أو الأقراص" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expiry-date">تاريخ انتهاء الصلاحية</label>
+                            <input type="date" id="expiry-date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="additional-info">معلومات إضافية</label>
+                            <textarea id="additional-info" class="form-control" placeholder="أي معلومات أخرى عن الدواء (مثل الحالة التخزينية، طريقة الحفظ...)"></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">إرسال التبرع</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الأدوية المتاحة -->
+    <section id="medicines">
+        <div class="container">
+            <h2 class="section-title">الأدوية المتاحة للتبرع</h2>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="all">جميع الأدوية</div>
+                <div class="tab" data-tab="recent">الأحدث</div>
+                <div class="tab" data-tab="expiring">قريبة الانتهاء</div>
+            </div>
+            
+            <div class="tab-content active" id="all-medicines">
+                <div class="medicines-grid" id="medicines-container">
+                    <!-- سيتم تعبئة الأدوية بواسطة JavaScript -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="recent-medicines">
+                <div class="medicines-grid" id="recent-container">
+                    <!-- سيتم تعبئة الأدوية بواسطة JavaScript -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="expiring-medicines">
+                <div class="medicines-grid" id="expiring-container">
+                    <!-- سيتم تعبئة الأدوية بواسطة JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- طلب أدوية -->
+    <section id="request" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">طلب أدوية</h2>
+            <div class="form-container">
+                <div class="form-header">
+                    <h3>طلب دواء غير متوفر</h3>
+                </div>
+                <div class="form-body">
+                    <form id="request-form">
+                        <div class="form-group">
+                            <label for="requester-name">اسم مقدم الطلب</label>
+                            <input type="text" id="requester-name" class="form-control" placeholder="أدخل اسمك الكامل" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="requester-phone">رقم الهاتف</label>
+                            <input type="tel" id="requester-phone" class="form-control" placeholder="أدخل رقم هاتفك" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="requested-medicine">اسم الدواء المطلوب</label>
+                            <input type="text" id="requested-medicine" class="form-control" placeholder="اسم الدواء التجاري أو العلمي" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="required-quantity">الكمية المطلوبة</label>
+                            <input type="number" id="required-quantity" class="form-control" placeholder="عدد العبوات أو الأقراص المطلوبة" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="medical-condition">الوصف الطبي (اختياري)</label>
+                            <textarea id="medical-condition" class="form-control" placeholder="وصف الحالة الطبية التي تتطلب هذا الدواء"></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">إرسال الطلب</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قصص نجاح -->
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title">قصص نجاح</h2>
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "لقد ساعدني هذا التطبيق في الحصول على الدواء الذي أحتاجه لعلاج ابنتي، بعد أن عجزت عن تحمل تكلفته. شكرًا لكل المتبرعين الذين يساهمون في إنقاذ حياة الآخرين."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">س</div>
+                        <div class="author-info">
+                            <h4>سامية عبد الرحمن</h4>
+                            <p>أم لطفلة مصابة بالصرع</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "كنت أمتلك أدوية زائدة بعد شفاء والدي، ولم أكن أعرف كيف أتخلص منها بطريقة آمنة ومفيدة. من خلال هذا التطبيق تبرعت بها وساعدت أشخاصًا محتاجين."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">م</div>
+                        <div class="author-info">
+                            <h4>محمد السيد</h4>
+                            <p>متبرع بالأدوية</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "بفضل هذا التطبيق، استطعنا في جمعيتنا الخيرية توفير الأدوية اللازمة لعشرات الأسر المحتاجة، مما ساهم في تحسين جودة حياتهم الصحية وتخفيف معاناتهم."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">خ</div>
+                        <div class="author-info">
+                            <h4>خالد الفهد</h4>
+                            <p>مدير جمعية خيرية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- إحصائيات -->
+    <section id="statistics" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">إحصائيات التبرعات</h2>
+            <div class="statistics">
+                <div class="stat-card">
+                    <i class="fas fa-pills fa-2x" style="color: var(--primary);"></i>
+                    <div class="stat-number">1,248</div>
+                    <div class="stat-title">دواء تم التبرع به</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users fa-2x" style="color: var(--primary);"></i>
+                    <div class="stat-number">543</div>
+                    <div class="stat-title">متبرع مسجل</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-hand-holding-heart fa-2x" style="color: var(--primary);"></i>
+                    <div class="stat-number">892</div>
+                    <div class="stat-title">طلب دواء تم تلبيته</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-hospital fa-2x" style="color: var(--primary);"></i>
+                    <div class="stat-number">23</div>
+                    <div class="stat-title">جهة صحية متعاونة</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- عن التطبيق -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">عن تطبيق دواك كن عونا</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.8;">
+                    تطبيق "دواك كن عونا" هو مبادرة إنسانية تهدف إلى تقليل هدر الأدوية الصالحة للاستخدام وتوجيهها للمرضى المحتاجين الذين لا يستطيعون تحمل تكاليفها. نقوم بربط المتبرعين بالأدوية الزائدة مع الجهات الخيرية والمستشفيات والمحتاجين مباشرة.
+                </p>
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.8;">
+                    نؤمن بأن كل دواء زائد يمكن أن يكون سببًا في إنقاذ حياة أو تحسين صحة شخص ما، ونسعى من خلال هذا التطبيق إلى تسهيل عملية التبرع وتوزيع الأدوية بشكل منظم وآمن، مع ضمان جودة الأدوية المتبرع بها وملاءمتها للاستخدام البشري.
+                </p>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="#donate" class="btn">انضم إلينا وساعد الآخرين</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>عن التطبيق</h3>
+                    <p>منصة إلكترونية تهدف إلى تسهيل عملية التبرع بالأدوية الزائدة وتوجيهها للمرضى المحتاجين، والمساهمة في تقليل الهدر الصحي.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#donate">التبرع بالأدوية</a></li>
+                        <li><a href="#medicines">الأدوية المتاحة</a></li>
+                        <li><a href="#request">طلب أدوية</a></li>
+                        <li><a href="#about">عن التطبيق</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>شارع التخصصي، الرياض، المملكة العربية السعودية</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone"></i>
+                        <span>+201005456075</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-user"></i>
+                        <span>المنشئ: بن خضر</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@medicine-donation.org</span>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة © 2023 تطبيق دواك كن عونا - بن خضر</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر العودة للأعلى -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- منطقة الإشعارات -->
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // بيانات الأدوية الافتراضية
+        const medicines = [
+            {
+                id: 1,
+                name: "باراسيتامول 500mg",
+                quantity: 5,
+                expiryDate: "2024-06-15",
+                donor: "أحمد محمد",
+                location: "الرياض",
+                description: "أقراص باراسيتامول لخفض الحرارة وتسكين الألم، غير منتهية الصلاحية وتخزينها جيد."
+            },
+            {
+                id: 2,
+                name: "أموكسيسيلين 500mg",
+                quantity: 3,
+                expiryDate: "2023-12-20",
+                donor: "سارة عبدالله",
+                location: "جدة",
+                description: "كبسولات أموكسيسيلين مضاد حيوي، تاريخ الصلاحية ينتهي بعد 4 أشهر."
+            },
+            {
+                id: 3,
+                name: "أوميبرازول 20mg",
+                quantity: 8,
+                expiryDate: "2025-01-10",
+                donor: "خالد حسن",
+                location: "الدمام",
+                description: "كبسولات أوميبرازول لعلاج حموضة المعدة، صلاحية طويلة."
+            },
+            {
+                id: 4,
+                name: "لوسارتان 50mg",
+                quantity: 2,
+                expiryDate: "2024-03-30",
+                donor: "فاطمة علي",
+                location: "الرياض",
+                description: "أقراص لوسارتان لعلاج ارتفاع ضغط الدم، بحالة جيدة."
+            },
+            {
+                id: 5,
+                name: "ميتفورمين 850mg",
+                quantity: 4,
+                expiryDate: "2023-11-15",
+                donor: "عمر عبدالرحمن",
+                location: "مكة المكرمة",
+                description: "أقراص ميتفورمين لعلاج السكري، تاريخ الصلاحية ينتهي بعد شهرين."
+            },
+            {
+                id: 6,
+                name: "أتورفاستاتين 20mg",
+                quantity: 6,
+                expiryDate: "2024-08-22",
+                donor: "نورة سعيد",
+                location: "الطائف",
+                description: "أقراص أتورفاستاتين لخفض الكوليسترول، صلاحية ممتازة."
+            }
+        ];
+
+        // دالة لعرض الأدوية
+        function displayMedicines(medicinesArray, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            medicinesArray.forEach(medicine => {
+                const expiryDate = new Date(medicine.expiryDate);
+                const today = new Date();
+                const timeDiff = expiryDate.getTime() - today.getTime();
+                const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                
+                const card = document.createElement('div');
+                card.className = 'medicine-card';
+                
+                card.innerHTML = `
+                    <div class="medicine-header">
+                        <div class="medicine-name">${medicine.name}</div>
+                        <div class="medicine-quantity">${medicine.quantity} عبوات</div>
+                    </div>
+                    <div class="medicine-body">
+                        <div class="medicine-detail">
+                            <i class="fas fa-user"></i>
+                            <span>المتبرع: ${medicine.donor}</span>
+                        </div>
+                        <div class="medicine-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>المكان: ${medicine.location}</span>
+                        </div>
+                        <div class="medicine-detail">
+                            <i class="fas fa-info-circle"></i>
+                            <span>${medicine.description}</span>
+                        </div>
+                        <div class="expiry-date">تنتهي الصلاحية بعد ${daysDiff} يوم</div>
+                    </div>
+                    <div class="medicine-actions">
+                        <button class="btn" onclick="requestMedicine(${medicine.id})">طلب الدواء</button>
+                        <button class="btn btn-secondary" onclick="showMedicineDetails(${medicine.id})">تفاصيل</button>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // دالة لطلب دواء
+        function requestMedicine(medicineId) {
+            const medicine = medicines.find(m => m.id === medicineId);
+            if (medicine) {
+                showNotification(`تم تقديم طلبك للحصول على ${medicine.name} بنجاح. سيتم التواصل معك قريبًا لتأكيد الطلب.`, 'success');
+            }
+        }
+
+        // دالة لعرض تفاصيل الدواء
+        function showMedicineDetails(medicineId) {
+            const medicine = medicines.find(m => m.id === medicineId);
+            if (medicine) {
+                const expiryDate = new Date(medicine.expiryDate);
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = expiryDate.toLocaleDateString('ar-EG', options);
+                
+                const details = `تفاصيل الدواء:\n\nالاسم: ${medicine.name}\nالكمية: ${medicine.quantity} عبوات\nتاريخ الانتهاء: ${formattedDate}\nالمتبرع: ${medicine.donor}\nالمكان: ${medicine.location}\n\n${medicine.description}`;
+                
+                showNotification(details, 'success');
+            }
+        }
+
+        // دالة لإظهار الإشعارات
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        // دالة لتصنيف الأدوية حسب الأحدث
+        function getRecentMedicines() {
+            return [...medicines].sort((a, b) => {
+                return new Date(b.expiryDate) - new Date(a.expiryDate);
+            }).slice(0, 4);
+        }
+
+        // دالة لتصنيف الأدوية حسب قرب انتهاء الصلاحية
+        function getExpiringMedicines() {
+            return [...medicines].sort((a, b) => {
+                const dateA = new Date(a.expiryDate);
+                const dateB = new Date(b.expiryDate);
+                const today = new Date();
+                
+                const diffA = dateA.getTime() - today.getTime();
+                const diffB = dateB.getTime() - today.getTime();
+                
+                return diffA - diffB;
+            }).slice(0, 4);
+        }
+
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            // عرض جميع الأدوية
+            displayMedicines(medicines, 'medicines-container');
+            
+            // عرض الأدوية الحديثة
+            displayMedicines(getRecentMedicines(), 'recent-container');
+            
+            // عرض الأدوية القريبة من الانتهاء
+            displayMedicines(getExpiringMedicines(), 'expiring-container');
+            
+            // إدارة التبويبات
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // إزالة النشاط من جميع التبويبات
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // إضافة النشاط للتبويب المحدد
+                    this.classList.add('active');
+                    
+                    // إخفاء جميع محتويات التبويبات
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // إظهار محتوى التبويب المحدد
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-medicines`).classList.add('active');
+                });
+            });
+            
+            // معالجة نموذج التبرع
+            const donationForm = document.getElementById('donation-form');
+            donationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // هنا نرسل البيانات إلى الخادم (في تطبيق حقيقي)
+                showNotification('شكرًا لتبرعك! تم استلام معلومات الدواء بنجاح. سيتم التواصل معك قريبًا لتأكيد التبرع.', 'success');
+                donationForm.reset();
+            });
+            
+            // معالجة نموذج الطلب
+            const requestForm = document.getElementById('request-form');
+            requestForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const medicineName = document.getElementById('requested-medicine').value;
+                showNotification(`تم تقديم طلبك للحصول على ${medicineName} بنجاح. سيتم التواصل معك حال توفر الدواء.`, 'success');
+                requestForm.reset();
+            });
+            
+            // إضافة تأثير التمرير السلس
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // تحديث حالة التنقل
+                        document.querySelectorAll('nav a').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        
+                        // التمرير السلس
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // إظهار/إخفاء زر العودة للأعلى
+            const backToTopBtn = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            
+            // حدث النقر على زر العودة للأعلى
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // إدارة الأقسام الظاهرة عند التمرير
+            const sections = document.querySelectorAll('section');
+            const checkSectionVisibility = () => {
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    const scrollPosition = window.pageYOffset + window.innerHeight - 100;
+                    
+                    if (scrollPosition > sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                        section.classList.add('active');
+                    }
+                });
+            };
+            
+            // التحقق عند التحميل وعند التمرير
+            window.addEventListener('load', checkSectionVisibility);
+            window.addEventListener('scroll', checkSectionVisibility);
+            
+            // تغيير شكل الهيدر عند التمرير
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.pageYOffset > 50) {
+                    header.style.padding = '0.5rem 0';
+                    header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                } else {
+                    header.style.padding = '1rem 0';
+                    header.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
